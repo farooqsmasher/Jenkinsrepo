@@ -1,27 +1,14 @@
-
-peline {
+pipeline {
     agent any
     stages {
-        stage('Test') {
+        stage('Build') {
             steps {
-                sh 'mvn test'
+                sh 'echo "Hello World"'
+                sh '''
+                    echo "Multiline shell steps works too"
+                    ls -lah
+                '''
             }
         }
-       stage ('Compile Stage') {
-
-            steps {
-                sh 'mvn clean compile'
-            }
-        }
-       stage('Testing') {
-            steps {
-                sh 'mvn test'
-               
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }  
-
+    }
+}
